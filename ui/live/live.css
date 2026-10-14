@@ -1,0 +1,541 @@
+/* ============================================================
+   light-weazelnews-live - live.css
+   ============================================================
+   Styles for the "Go Live" add-on. Linked from index.html as
+   live/live.css - 404s harmlessly if this file isn't present, so the
+   base resource looks identical whether or not this add-on is installed.
+   ============================================================ */
+
+/* ---------- Live broadcasts ("Go Live") ---------- */
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wn-red);
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(225,29,46,.6);
+  animation: wn-live-pulse 1.6s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes wn-live-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(225,29,46,.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(225,29,46,0); }
+  100% { box-shadow: 0 0 0 0 rgba(225,29,46,0); }
+}
+
+/* "X is live" banner(s) at the top of the feed */
+.live-banner-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.live-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(225,29,46,.18), rgba(225,29,46,.06));
+  border: 1px solid var(--wn-red);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.live-banner-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.live-banner-title {
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.live-banner-sub {
+  font-size: 11.5px;
+  color: var(--wn-text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.watch-live-btn {
+  flex-shrink: 0;
+  background: var(--wn-red);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Go Live card + active-broadcast bar on the Publish tab */
+.live-card {
+  background: var(--wn-card-alt);
+  border: 1px solid var(--wn-border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+.live-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--wn-red);
+  margin-bottom: 6px;
+}
+
+.live-card-sub {
+  font-size: 12px;
+  color: var(--wn-text-dim);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.go-live-btn {
+  width: 100%;
+  background: var(--wn-red);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.go-live-btn i { font-size: 10px; }
+
+.go-live-btn:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
+.live-active-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--wn-card-alt);
+  border: 1px solid var(--wn-red);
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 18px;
+}
+
+/* The reporter's own stream, embedded back at them just so they can see
+   it's actually showing up - sits below the active bar, not inline with
+   it, since a stream embed needs real width to render (unlike the old
+   webcam thumbnail this replaces). */
+.live-self-preview-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.live-self-preview-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Shown in place of the iframe when a platform has no real embeddable
+   live player (TikTok) - matches .live-viewer-open-external's look, just
+   without the click-to-open link since this is the reporter's own copy. */
+.live-self-preview-unavailable {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.live-self-preview-unavailable i { font-size: 20px; }
+
+.live-active-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.live-active-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.live-active-sub {
+  font-size: 11.5px;
+  color: var(--wn-text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.live-active-viewers {
+  font-size: 11.5px;
+  color: var(--wn-text-dim);
+  margin-top: 2px;
+}
+
+.end-live-btn {
+  flex-shrink: 0;
+  background: var(--wn-red);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Live viewer full-page modal */
+.live-viewer-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.live-viewer-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 12;
+  max-height: 55vh;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.live-viewer-video {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.live-viewer-status {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.5);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wn-text-dim);
+}
+
+.live-viewer-status.hidden { display: none; }
+
+/* Shown in place of the iframe when a platform has no real embeddable
+   live player (TikTok) - a plain "go watch it there" link/button rather
+   than a broken or blank video area. */
+.live-viewer-open-external {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(0,0,0,.75);
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.live-viewer-open-external i { font-size: 20px; }
+
+.live-viewer-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-viewer-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.live-viewer-sub {
+  font-size: 12px;
+  color: var(--wn-text-dim);
+  margin-top: 2px;
+}
+
+/* Viewer's own "like this stream" button, inside the live viewer modal.
+   One like per viewer per broadcast (server-enforced) - once clicked it
+   switches to a filled/red "liked" state and stays disabled rather than
+   toggling, since there's no "unlike" concept for a live moment. */
+.live-like-btn {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--wn-card-alt);
+  border: 1px solid var(--wn-border);
+  color: var(--wn-text);
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease, color .15s ease;
+}
+
+.live-like-btn:active { transform: scale(0.92); }
+
+.live-like-btn.liked {
+  background: var(--wn-red);
+  border-color: var(--wn-red);
+  color: #fff;
+  cursor: default;
+}
+
+.live-like-btn:disabled { opacity: .8; }
+
+/* Small heart+count shown in the reporter's own "you're live" bar so they
+   can see likes rolling in without opening anything - purely a readout,
+   not clickable. */
+.live-active-like-icon {
+  color: var(--wn-red);
+  margin-left: 6px;
+}
+
+/* Viewer's own "send a live comment" form, inside the live viewer modal */
+.live-comment-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.live-comment-input {
+  flex: 1;
+  background: var(--wn-card-alt);
+  border: 1px solid var(--wn-border);
+  color: var(--wn-text);
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.live-comment-send {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--wn-red);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.live-comment-send:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
+/* Reporter-only floating overlay of incoming live comments while
+   broadcasting - see the comment on #liveCommentOverlay in index.html for
+   why this is private by construction. Sits above ordinary view content
+   but below every modal (z-index 40+) so opening a post/profile/live
+   viewer cleanly hides it instead of comments floating over the modal. */
+.live-comment-overlay {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 18px;
+  z-index: 39;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.live-comment-item {
+  align-self: flex-start;
+  max-width: 88%;
+  background: rgba(22, 24, 31, 0.9);
+  border: 1px solid var(--wn-border);
+  border-radius: 14px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  animation: wn-comment-in .2s ease;
+  transition: opacity .4s ease;
+}
+
+.live-comment-item.fade-out {
+  opacity: 0;
+}
+
+.live-comment-author {
+  font-weight: 700;
+  color: var(--wn-red);
+  margin-right: 5px;
+}
+
+@keyframes wn-comment-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Live polls - reporter-side host controls (in the "Go Live" tab, only
+   while broadcasting) and the viewer-side read/vote display (in the live
+   viewer modal). */
+.live-poll-host {
+  background: var(--wn-card-alt);
+  border: 1px solid var(--wn-border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+.live-poll-host-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--wn-red);
+  margin-bottom: 10px;
+}
+
+#livePollStartForm .field-input {
+  margin-bottom: 8px;
+}
+
+.live-poll-question {
+  font-size: 13.5px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.live-poll-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.live-poll-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.live-poll-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--wn-text-dim);
+}
+
+.live-poll-bar-track {
+  background: rgba(255, 255, 255, .08);
+  border-radius: 6px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.live-poll-bar-fill {
+  height: 100%;
+  background: var(--wn-red);
+  border-radius: 6px;
+  transition: width .3s ease;
+}
+
+/* Viewer-side poll, inside the live viewer modal */
+.live-poll-viewer {
+  background: var(--wn-card-alt);
+  border: 1px solid var(--wn-border);
+  border-radius: 12px;
+  padding: 12px;
+  margin: 0 14px 12px;
+}
+
+.live-poll-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.live-poll-option-btn {
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid var(--wn-border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+.live-poll-option-btn:disabled {
+  cursor: default;
+}
+
+.live-poll-option-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(225, 29, 46, .35);
+  z-index: 0;
+  transition: width .3s ease;
+}
+
+.live-poll-option-label,
+.live-poll-option-pct {
+  position: relative;
+  z-index: 1;
+}
+
+.live-poll-option-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.live-poll-option-btn.voted {
+  border-color: var(--wn-red);
+}
+
